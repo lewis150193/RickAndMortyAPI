@@ -37,7 +37,7 @@ class HomePage extends Component{
             <>
                 <form onSubmit={(e) => this.sendData(e)}>
                     <label>
-                        Name:
+                        Enter Name:
                         <input style={this.state.userId.length %  2 === 0  ? styles : {}} type="text" value={this.state.userId}  name='userId' onChange={this.onChange} />
                     </label>
                     <input type="submit" value="Submit" />
