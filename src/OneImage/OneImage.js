@@ -23,7 +23,6 @@ class OneImage extends Component {
         console.log(this.props);
         return (
             <div className="App">
-                <p>One Image</p>
                 <Character
                     name={characters.name}
                     alt={characters.name}

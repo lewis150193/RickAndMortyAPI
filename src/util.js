@@ -1,8 +1,8 @@
-
-export const getImages = () => {
-    fetch('https://rickandmortyapi.com/api/character')
+ const getImages = ({setState}) => {
+ fetch('https://rickandmortyapi.com/api/characters')
         .then(character => character.json())
-        .then(c => c.results);
+        .then(c => c.results)
+        .then( results => console.log(results))
 
-    return getImages
-}
+};
+
