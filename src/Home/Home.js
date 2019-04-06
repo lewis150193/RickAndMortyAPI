@@ -79,9 +79,7 @@ class HomePage extends Component{
                     title={postState.title}
                     body={postState.body}
                 />
-                <form onClick={ e => this.handleSubmit(e)}>
-                <button className='Button'>Get All Images</button>
-                </form>
+                <button  onClick={e => this.handleSubmit(e)} className='Button'>Get All Images</button>
             </>
         )
     }
