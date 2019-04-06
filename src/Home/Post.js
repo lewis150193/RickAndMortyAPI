@@ -5,7 +5,7 @@ export const Post = ({title,body,user,id,style}) => (
         {`[Id: ${id}] 
          [User: ${user}]
          [Title: ${title}]
-         [Body:${body}`}]
+         [Body:${body}]`}
     </div>
     </>
 );

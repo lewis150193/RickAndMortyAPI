@@ -1,34 +1,24 @@
 import React, { Component } from 'react';
 import '../App.css';
-import {Character} from "../Character";
+import { connect } from 'react-redux'
+import {getCharacters} from "../actions";
+import {Character} from "../Components/Character";
 
 class PhotoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      characters: [{}]
-    }
-  }
-
   componentDidMount() {
-      setTimeout(
-    fetch('https://rickandmortyapi.com/api/character')
-        .then(character => character.json())
-        .then(c => c.results)
-        .then(result => this.setState({characters: result}))
-  ,10000)
+     this.props.getcharacterAction();
   };
 
   render() {
-   const { characters } = this.state;
+   const { characters } = this.props;
    const {history} = this.props;
-    console.log(characters);
-    console.log(this.props);
+    // console.log(this.props);
+      console.log(characters)
     return (
         <>
             <p style={{  cursor: 'pointer', border: 'black solid', width: '40px'}} onClick={() => {history.push('/')} }>Back</p>
             <div className="App">
-        {this.state.characters.map( character => (
+        {characters.map( character => (
             <Character
                 name={character.name}
                 id={character.id}
@@ -42,4 +32,14 @@ class PhotoList extends Component {
     );
   }
 }
-export default PhotoList;
+
+const mapStateToProps = (state) => ({
+    characters:  state.characters
+});
+
+const mapDispatchToProps = {
+    getcharacterAction: getCharacters
+
+};
+export default connect(mapStateToProps,mapDispatchToProps)(PhotoList);
+

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Post} from "./Post";
+import {postData} from "../actions";
+import {connect} from "react-redux";
 
 class HomePage extends Component{
     constructor(props) {
@@ -12,10 +14,6 @@ class HomePage extends Component{
         }
 
     }
-
-
-
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.history.push('/photos');
@@ -32,19 +30,7 @@ class HomePage extends Component{
         if(id  === '' || title === '' || body === '') {
             alert('Please fill in all fields')
         } else {
-            fetch('https://jsonplaceholder.typicode.com/posts', {
-                method: 'POST',
-                body: JSON.stringify({
-                    title: title,
-                    body: body,
-                    userId: id
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
-                .then(response => response.json())
-                .then(json => this.setState({response: json}));
+            this.props.post(id,title,body)
         }
     };
     render() {
@@ -62,7 +48,6 @@ class HomePage extends Component{
              position: 'absolute',
              marginTop: '-25%',
             alignContent: 'center'
-
     };
         const noInput = {
             display: 'flex',
@@ -71,26 +56,28 @@ class HomePage extends Component{
 
 
         };
-        const {response} = this.state;
+        const { postState } = this.props;
+        console.log(this.props);
+
         return(
             <>
                 <form style={formsStyles}>
                     <label>
                         Post to API
                         <div style={{flexDirection: 'column'}}>
-                       id: <input style={this.state.id.length === 0 ? {borderColor: '#d84949',...noInput} : {borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.id}  name='id' onChange={this.onChange} />
-                       title: <input style={this.state.title.length === 0  ? {borderColor: '#d84949',...noInput} : {borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.title}  name='title' onChange={this.onChange} />
-                       body: <input style={this.state.body.length  === 0  ? {borderColor: '#d84949',...noInput} : {borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.body}  name='body' onChange={this.onChange} />
+                       id: <input style={this.state.id.length === 0 ? {borderWidth: '4px',borderColor: '#d84949',...noInput} : {borderWidth: '4px', borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.id}  name='id' onChange={this.onChange} />
+                       title: <input style={this.state.title.length === 0  ? {borderWidth: '4px',borderColor: '#d84949',...noInput} : {borderWidth: '4px', borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.title}  name='title' onChange={this.onChange} />
+                       body: <input style={this.state.body.length  === 0  ? {borderWidth: '4px',borderColor: '#d84949',...noInput} : {borderWidth: '4px', borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.body}  name='body' onChange={this.onChange} />
                         </div>
                     </label>
                     <input  type="submit" value="Submit" onClick={e => this.sendData(e)}/>
                 </form>
-                <Post style={JSON.stringify(this.state.response) === JSON.stringify({})
+                <Post style={JSON.stringify(postState) === JSON.stringify([])
                     ? {display: 'none'} : {color: 'green', whiteSpace: 'pre-line',   alignSelf: 'flex-end'}}
-                    id={response.id}
-                    user={response.userId}
-                    title={response.title}
-                    body={response.body}
+                    id={postState.id}
+                    user={postState.userId}
+                    title={postState.title}
+                    body={postState.body}
                 />
                 <form onClick={ e => this.handleSubmit(e)}>
                 <button className='Button'>Get All Images</button>
@@ -100,4 +87,12 @@ class HomePage extends Component{
     }
 
 }
-export default HomePage;
+const mapStateToProps = (state) => ({
+    postState : state.post
+});
+
+const mapDispatchToProps = {
+    post: postData
+
+};
+export default connect(mapStateToProps,mapDispatchToProps)(HomePage);
