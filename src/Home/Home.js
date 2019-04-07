@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Post} from "./Post";
 import {postData} from "../actions";
 import {connect} from "react-redux";
+import {Button, Input, Div} from "../Styles/Button";
 
 class HomePage extends Component{
     constructor(props) {
@@ -10,7 +11,6 @@ class HomePage extends Component{
             id: '',
             title: '',
             body: '',
-            response: {}
         }
 
     }
@@ -60,7 +60,7 @@ class HomePage extends Component{
         console.log(this.props);
 
         return(
-            <>
+            <Div>
                 <form style={formsStyles}>
                     <label>
                         Post to API
@@ -70,7 +70,7 @@ class HomePage extends Component{
                        body: <input style={this.state.body.length  === 0  ? {borderWidth: '4px',borderColor: '#d84949',...noInput} : {borderWidth: '4px', borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.body}  name='body' onChange={this.onChange} />
                         </div>
                     </label>
-                    <input  type="submit" value="Submit" onClick={e => this.sendData(e)}/>
+                    <Input primary type="submit" value="Submit" onClick={e => this.sendData(e)}/>
                 </form>
                 <Post style={JSON.stringify(postState) === JSON.stringify([])
                     ? {display: 'none'} : {color: 'green', whiteSpace: 'pre-line',   alignSelf: 'flex-end'}}
@@ -79,8 +79,8 @@ class HomePage extends Component{
                     title={postState.title}
                     body={postState.body}
                 />
-                <button  onClick={e => this.handleSubmit(e)} className='Button'>Get All Images</button>
-            </>
+                <Button  onClick={e => this.handleSubmit(e)} >Get All Images</Button>
+            </Div>
         )
     }
 
