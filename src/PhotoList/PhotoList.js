@@ -9,6 +9,7 @@ class PhotoList extends Component {
      this.props.getcharacterAction();
   };
 
+
   render() {
    const { characters } = this.props;
    const {history} = this.props;
