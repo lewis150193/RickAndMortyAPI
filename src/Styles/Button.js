@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background-color: ${props => props.primary ? 'firebrick' : 'lightgreen' };
+  background-color: ${props => props.primary ? 'firebrick' : 'blue' };
   border: solid darkgray thin;
   padding: 4px;
   justify-content: center;
@@ -10,9 +10,14 @@ export const Button = styled.button`
   margin: 80px 40px 40px 40px;
   display: flex;
   color: darkblue;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 50px;
+  left: 40px;
   cursor: pointer;
+  
+  :hover{
+  background-color: yellow;
+  }
 
 `;
 

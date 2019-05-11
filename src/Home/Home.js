@@ -81,7 +81,7 @@ class HomePage extends Component{
                 />
                 <Button  onClick={e => this.handleSubmit(e)} >Get All Images</Button>
                 <br/>
-                <Button  onClick={() => this.props.history.push('/filter')} >Filter Images</Button>
+                <Button primary  onClick={() => this.props.history.push('/filter')} >Filter Images</Button>
             </Div>
         )
     }
