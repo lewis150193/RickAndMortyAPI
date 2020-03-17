@@ -63,6 +63,8 @@ class HomePage extends Component{
             <Div>
                 <form style={formsStyles}>
                     <label>
+                        Enter Name:
+                        <input style={this.state.userId.length %  2 === 0  ? styles : {}} type="text" value={this.state.userId}  name='userId' onChange={this.onChange} />
                         Post to API
                         <div style={{flexDirection: 'column'}}>
                        id: <input style={this.state.id.length === 0 ? {borderWidth: '4px',borderColor: '#d84949',...noInput} : {borderWidth: '4px', borderColor:'#3aaf36' , ...noInput}} type="text" value={this.state.id}  name='id' onChange={this.onChange} />
