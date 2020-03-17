@@ -5,6 +5,7 @@
   margin: 20px;
   justify-content: space-evenly;
   color: black;
+  flex: fit-content;
   border: aquamarine 15px solid;
 
 }

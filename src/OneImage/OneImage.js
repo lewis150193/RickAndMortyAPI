@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import '../App.css';
-import {Character} from "../Character";
+import {Character} from "../Components/Character";
+import {getCharacter} from "../actions";
+import {connect} from "react-redux";
 
 class OneImage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            characters: {}
-        }
-
-    }
     componentDidMount() {
         const photo = this.props.match.params.id;
-        fetch(`https://rickandmortyapi.com/api/character/${photo}`)
-            .then(character => character.json())
-            .then(result => this.setState({characters: result}));
+        this.props.getcharacterAction(photo)
     };
 
     render() {
-        const { characters } = this.state;
-        console.log(characters);
+        const { character } = this.props;
+        console.log(character);
         console.log(this.props);
         return (
             <div className="App">
-                <p>One Image</p>
                 <Character
-                    name={characters.name}
-                    alt={characters.name}
-                    id={characters.id}
-                    source={characters.image}
+                    name={character.name}
+                    alt={character.name}
+                    id={character.id}
+                    source={character.image}
                     />
             </div>
         );
     }
 }
+const mapStateToProps = (state) => ({
+    character:  state.character
+});
 
-export default OneImage;
+const mapDispatchToProps = {
+    getcharacterAction: getCharacter
+
+};
+export default connect(mapStateToProps,mapDispatchToProps)(OneImage);
+
